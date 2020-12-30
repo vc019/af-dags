@@ -20,7 +20,7 @@ default_args = {
 
 dag = DAG('hello_world2', schedule_interval='0 0 * * *' ,
   default_args=default_args)
-  create_command = 'echo   HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO '
+create_command = 'echo   HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO '
 t1 = BashOperator(
   task_id='print_date',
   bash_command='date',
