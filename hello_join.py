@@ -10,7 +10,7 @@ from airflow.utils.trigger_rule import TriggerRule
 default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
-    'start_date': datetime(2019, 7, 20),
+    'start_date': datetime(2020, 12, 30),
     'email': ['vipin.chadha@gmail.com'],
     'email_on_failure': False,
     'email_on_retry': False,
