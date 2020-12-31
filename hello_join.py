@@ -23,7 +23,7 @@ p_val = Variable.get('v_val')  # Variable passed to registered method
 
 # Step 2 - Create a DAG object
 dag = DAG('hello_joins',
-          schedule_interval='0 0 * * *',
+          schedule_interval='0 0 1 * *',
           default_args=default_args
           )
 
