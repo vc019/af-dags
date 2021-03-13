@@ -2,7 +2,7 @@
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
-from cw_pagerduty import cw_pagerduty
+from cw_pagerduty.cw_pagerduty import trigger_incident
 import logging
 
 logger = logging.getLogger(__name__)
@@ -15,7 +15,7 @@ def cw_sla_missed_take_action(*args, **kwargs):
     incident_title = 'airflow integration test title'
     incident_details = 'Integration with airflow looks good. Here is some nice info'
     incident_priority = 'P1'
-    cw_pagerduty.trigger_incident(incident_title, incident_details, incident_priority)
+    trigger_incident(incident_title, incident_details, incident_priority)
     logger.info("************************************* incident created ***************************************")
 
 default_args = {
