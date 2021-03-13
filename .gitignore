@@ -9,4 +9,4 @@
 *.pem
 *.pub
 .idea
-.idea/
+.idea/*

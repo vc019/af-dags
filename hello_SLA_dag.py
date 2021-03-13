@@ -1,8 +1,11 @@
 # Filename: hello_SLA_dag.py
+import sys
+sys.path.insert(0,os.path.abspath(os.path.dirname(__file__)))
+
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
-from .cw_pagerduty_pkg.cw_pagerduty import trigger_incident
+from cw_pagerduty_pkg.cw_pagerduty import trigger_incident
 import logging
 
 logger = logging.getLogger(__name__)
