@@ -1,5 +1,5 @@
 # Filename: hello_SLA_dag.py
-from cw_pagerduty import trigger_incident
+from .cw_pagerduty import trigger_incident
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
