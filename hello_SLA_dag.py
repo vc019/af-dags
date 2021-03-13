@@ -2,7 +2,7 @@
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
-from .cw_pagerduty import cw_pagerduty
+from cw_pagerduty import cw_pagerduty
 import logging
 
 logger = logging.getLogger(__name__)
