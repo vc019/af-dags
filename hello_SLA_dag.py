@@ -1,5 +1,5 @@
 # Filename: hello_SLA_dag.py
-from .cw_pagerduty import trigger_incident
+import cw_pagerduty
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from datetime import datetime, timedelta
@@ -15,7 +15,7 @@ def cw_sla_missed_take_action(*args, **kwargs):
     incident_title = 'airflow integration test title'
     incident_details = 'Integration with airflow looks good. Here is some nice info'
     incident_priority = 'P1'
-    trigger_incident(incident_title, incident_details, incident_priority)
+    cw_pagerduty.trigger_incident(incident_title, incident_details, incident_priority)
     logger.info("************************************* incident created ***************************************")
 
 default_args = {

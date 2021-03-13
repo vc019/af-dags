@@ -1,0 +1,11 @@
+# Compiled files
+*.tfvars
+*.tfstate*
+.terraform.*
+# Module directory
+.terraform/
+*.id_rsa
+*.id_dsa
+*.pem
+*.pub
+.idea
