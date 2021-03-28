@@ -28,7 +28,7 @@ s3_sensor = S3KeySensor(
     poke_interval=2,
     timeout=10,
     soft_fail=True,
-    bucket_key='s3://cloudwalker-spark/flowgi/sensor_demo/my_testfile.txt',
+    bucket_key='s3://cloudwalker-spark3/flowgi/sensor_demo/my_testfile.txt',
     bucket_name=None,
     dag=dag)
 
