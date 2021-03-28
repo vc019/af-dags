@@ -40,7 +40,7 @@ failure_task = BashOperator(
     dag=dag)
 
 def my_custom_func():
-    print 'Hello from call back!'
+    print('Hello from call back!')
 
 success_task = PythonOperator(
     task_id='print_the_context',
