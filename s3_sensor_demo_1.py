@@ -22,14 +22,15 @@ dag = DAG('s3_sensor_dag_1',
           default_args=default_args,
           catchup=False
           )
-
+s3_bucketname = Variable.get("s3_bucketname", deserialize_json=False)
+s3_loc = Variable.get("s3_loc", deserialize_json=False)
 s3_sensor = S3KeySensor(
     task_id='s3_check_if_file_present',
     poke_interval=2,
     timeout=10,
     soft_fail=True,
-    bucket_key='flowgi/sensor_demo/my_testfile.txt',
-    bucket_name='cloudwalker-spark3',
+    bucket_key=s3_loc,
+    bucket_name=s3_bucketname,
     aws_conn_id='customer1_s3_logs',
     dag=dag)
 
