@@ -4,6 +4,7 @@ from airflow.operators.sensors import S3KeySensor
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
+from airflow.models import Variable
 
 default_args = {
     'owner': 'airflow',
