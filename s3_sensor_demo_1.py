@@ -30,6 +30,7 @@ s3_sensor = S3KeySensor(
     soft_fail=True,
     bucket_key='s3://cloudwalker-spark3/flowgi/sensor_demo/my_testfile.txt',
     bucket_name=None,
+    aws_conn_id='customer1_s3_logs',
     dag=dag)
 
 failure_task = BashOperator(
