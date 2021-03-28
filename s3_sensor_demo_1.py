@@ -43,7 +43,7 @@ def my_custom_func():
     print("Hello from call back!")
 
 success_task = PythonOperator(
-    task_id='print_the_context',
+    task_id='in_case_of_success',
     python_callable=my_custom_func,
     trigger_rule='all_done',
     dag=dag,
