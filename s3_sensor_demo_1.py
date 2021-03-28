@@ -1,8 +1,8 @@
 from datetime import datetime, timedelta
 from airflow.models import DAG
+from airflow.operators.sensors import S3KeySensor
 from airflow.operators.dummy_operator import DummyOperator
 from airflow.operators.bash_operator import BashOperator
-from airflow.operators.s3_key_sensor import S3KeySensor
 from airflow.operators.python_operator import PythonOperator
 
 default_args = {
