@@ -18,7 +18,7 @@ default_args = {
     'retry_delay': timedelta(minutes=5)
 }
 
-dag = DAG('s3_sensor_dag_1',
+dag = DAG('s3_sensor_dag',
           schedule_interval='@daily',
           default_args=default_args,
           catchup=False
@@ -42,8 +42,10 @@ failure_task = BashOperator(
     trigger_rule='all_failed',
     dag=dag)
 
+
 def my_custom_func():
     print("Hello from call back!")
+
 
 success_task = PythonOperator(
     task_id='in_case_of_success',
