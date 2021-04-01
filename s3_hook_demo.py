@@ -48,7 +48,7 @@ def my_custom_func():
 
 
 process_task = PythonOperator(
-    task_id='Files_Arrived - Lets move them',
+    task_id='Files_Arrived',
     python_callable=my_custom_func,
     trigger_rule='all_success',
     dag=dag,
