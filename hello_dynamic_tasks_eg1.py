@@ -9,7 +9,7 @@ default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
     'start_date': datetime(2020, 12, 18),
-    'email': ['vipin.chadha@gmail.com'],
+    'email': ['vipin@flowg.io'],
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,

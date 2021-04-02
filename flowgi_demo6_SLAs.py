@@ -1,4 +1,4 @@
-# Filename: hello_SLA_dag.py
+# Filename: flowgi_demo6_SLAs.py
 import os
 import sys
 sys.path.insert(0,os.path.abspath(os.path.dirname(__file__)))
@@ -26,7 +26,7 @@ default_args = {
     'owner': 'airflow',
     'depends_on_past': False,
     'start_date': datetime(2020, 12, 14),
-    'email': ['vipin.chadha@gmail.com'],
+    'email': ['vipin@flowg.io'],
     'email_on_failure': False,
     'email_on_retry': False,
     'retries': 1,
@@ -34,7 +34,7 @@ default_args = {
     'sla': timedelta(seconds=5)
 }
 
-dag = DAG('hello_sla_dag',
+dag = DAG('flowgi_demo6_SLAs',
           schedule_interval='* * * * *',
           default_args=default_args,
           catchup=False,
