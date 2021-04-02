@@ -18,8 +18,11 @@ default_args = {
 # 'end_date': datetime(2016, 1, 1),
 }
 
-dag = DAG('flowgi_demo_1', schedule_interval='0 0 1 * *' ,
-  default_args=default_args)
+dag = DAG('flowgi_demo_1',
+          schedule_interval='0 0 1 * *' ,
+          catchup=False,
+          default_args=default_args)
+
 create_command = 'echo   HELLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO '
 t1 = BashOperator(
   task_id='print_date',
