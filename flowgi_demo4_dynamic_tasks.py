@@ -52,13 +52,14 @@ def flowgi_dynamic_task_generator():
     keys = v_s3hook.list_keys(s3_bucketname, s3_prefix)
     for key in keys:
         k = key.translate({ord(c): "" for c in "!@#$%^&*()[]{};:,./<>?\|`~-=_+"})
+        print("Creating a task for key %s", key)
         process_task = PythonOperator(
             task_id='Process_file_' + k,
             python_callable=flowgi_process_file,
             op_kwargs={'s3_bucket': s3_bucketname, 's3_key': k},
             dag=dag
         )
-        generate_tasks >> process_task >> end_task
+        s3_prefix_sensor >> process_task >> end_task
 
 
 generate_tasks = PythonOperator(
