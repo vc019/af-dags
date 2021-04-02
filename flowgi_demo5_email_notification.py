@@ -18,7 +18,7 @@ default_args = {
     'retry_delay': timedelta(minutes=5)
 }
 
-dag = DAG('s3_hook_demo',
+dag = DAG('flowgi_demo5_email_notification',
           schedule_interval='@daily',
           default_args=default_args,
           catchup=False

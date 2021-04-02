@@ -18,7 +18,7 @@ default_args = {
     'retry_delay': timedelta(minutes=5)
 }
 
-dag = DAG('s3_hook_demo',
+dag = DAG('flowgi_demo4_dynamic_tasks',
           schedule_interval='@daily',
           default_args=default_args,
           catchup=False
@@ -51,7 +51,7 @@ def flowgi_dynamic_task_generator():
             op_kwargs={'s3_bucket': s3_bucketname, 's3_key': k},
             dag=dag
         )
-        generate_tasks >> process_task
+        s3_prefix_sensor >> process_task
 
 
 generate_tasks = PythonOperator(
