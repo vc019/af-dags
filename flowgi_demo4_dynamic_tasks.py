@@ -29,7 +29,6 @@ s3_loc = Variable.get("s3_loc", deserialize_json=False)
 s3_prefix = Variable.get("s3_prefix_demo4", deserialize_json=False)
 
 start_task = DummyOperator(task_id='demo4_start', dag=dag)
-end_task = DummyOperator(task_id='end', dag=dag)
 
 s3_prefix_sensor = S3PrefixSensor(
     task_id='s3_prefix_sensor',
@@ -48,9 +47,11 @@ def flowgi_process_file(s3_bucket, s3_key):
 
 def flowgi_dynamic_task_generator():
     print("Hello from call back! - Let's launch multiple tasks based on the files found")
+    end_task = DummyOperator(task_id='end', dag=dag)
     v_s3hook = S3Hook(aws_conn_id='customer1_demo_s3')
     keys = v_s3hook.list_keys(s3_bucketname, s3_prefix)
-    for k in keys:
+    for key in keys:
+        k = key.translate({ord(c): "" for c in "!@#$%^&*()[]{};:,./<>?\|`~-=_+"})
         process_task = PythonOperator(
             task_id='Process_file_' + k,
             python_callable=flowgi_process_file,
