@@ -35,6 +35,8 @@ s3_prefix_sensor = S3PrefixSensor(
     task_id='s3_prefix_sensor',
     bucket_name=s3_bucketname,
     prefix=s3_prefix,
+    poke_interval=5,
+    timeout=10,
     aws_conn_id='customer1_s3_logs',
     dag=dag
 )
@@ -55,7 +57,7 @@ def flowgi_dynamic_task_generator():
             op_kwargs={'s3_bucket': s3_bucketname, 's3_key': k},
             dag=dag
         )
-        generate_tasks >> process_task >>end_task
+        generate_tasks >> process_task >> end_task
 
 
 generate_tasks = PythonOperator(

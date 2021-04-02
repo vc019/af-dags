@@ -28,7 +28,7 @@ s3_loc = Variable.get("s3_loc", deserialize_json=False)
 
 s3_sensor = S3KeySensor(
     task_id='s3_check_if_file_present',
-    poke_interval=2,
+    poke_interval=5,
     timeout=10,
     soft_fail=True,
     bucket_key=s3_loc,
