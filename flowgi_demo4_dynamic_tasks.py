@@ -45,6 +45,8 @@ s3_sensor = S3KeySensor(
 
 def flowgi_process_file(s3_bucket, s3_key):
     print("Hello World")
+    print("Bucket Name:"+s3_bucket)
+    print("Key Name:" + s3_key)
 
 
 start_task >> s3_sensor
@@ -52,7 +54,6 @@ start_task >> s3_sensor
 v_s3hook = S3Hook(aws_conn_id='customer1_demo_s3')
 keys = v_s3hook.list_keys(s3_bucketname, s3_key_prefix)
 
-s3_key_prefix = s3_key_prefix + '/'
 for key in keys:
     k = ''.join(e for e in key if e.isalnum())
     if key != s3_key_prefix:
@@ -60,7 +61,7 @@ for key in keys:
         process_task = PythonOperator(
             task_id='Process_file_' + k,
             python_callable=flowgi_process_file,
-            op_kwargs={'s3_bucket': s3_bucketname, 's3_key': k},
+            op_kwargs={'s3_bucket': s3_bucketname, 's3_key': key},
             dag=dag
         )
     s3_sensor >> process_task >> end_task
