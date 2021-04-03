@@ -14,7 +14,7 @@ default_args = {
     'email_on_failure': False,
     'max_active_runs': 1,
     'email_on_retry': False,
-    'retries': 50,
+    'retries': 2,
     'retry_delay': timedelta(minutes=5)
 }
 
@@ -23,8 +23,9 @@ dag = DAG('flowgi_demo2_s3_sensor',
           default_args=default_args,
           catchup=False
           )
-s3_bucketname = Variable.get("s3_bucketname", deserialize_json=False)
-s3_loc = Variable.get("s3_loc", deserialize_json=False)
+s3_bucketname = Variable.get("demo2_s3_bucketname", deserialize_json=False)
+s3_loc = Variable.get("demo2_s3_loc", deserialize_json=False)
+
 s3_sensor = S3KeySensor(
     task_id='s3_check_if_file_present',
     poke_interval=2,
