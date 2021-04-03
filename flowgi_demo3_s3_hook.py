@@ -41,7 +41,7 @@ def my_custom_func():
     print("Hello from call back! - Let me move the files")
     v_s3hook = S3Hook(aws_conn_id='customer1_demo_s3')
     s3_dest_bucket = Variable.get("demo3_dest_s3_bucket", deserialize_json=False)
-    s3_dest_key = Variable.get("demo3_dest_dest_loc", deserialize_json=False)
+    s3_dest_key = Variable.get("demo3_dest_s3_loc", deserialize_json=False)
     v_s3hook.copy_object(source_bucket_name=s3_bucketname, source_bucket_key=s3_loc, dest_bucket_name=s3_dest_bucket,
                          dest_bucket_key=s3_dest_key)
     v_s3hook.delete_objects(s3_bucketname, [s3_loc])
