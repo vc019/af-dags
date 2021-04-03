@@ -35,14 +35,6 @@ v_email_body = Variable.get("demo5_email_body", deserialize_json=False)
 
 start_task = DummyOperator(task_id='demo5_start', dag=dag)
 
-notify_via_email = EmailOperator(
-    task_id="notify_via_email",
-    to=v_email_id,
-    subject=v_email_subject,
-    html_content=v_email_body,
-    trigger_rule='all_success',
-    dag=dag)
-
 s3_sensor = S3KeySensor(
     task_id='check_if_files_arrived',
     poke_interval=5,
@@ -60,13 +52,26 @@ def flowgi_process_file(s3_bucket, s3_key):
     print("Bucket Name:" + s3_bucket)
     print("Key Name:" + s3_key)
 
-
-start_task >> s3_sensor
-
 v_s3hook = S3Hook(aws_conn_id='customer1_demo_s3')
 keys = v_s3hook.list_keys(s3_bucketname, s3_key_prefix)
 s3_key_prefix = s3_key_prefix + '/'
 print("S3 Key Prefix:" + s3_key_prefix)
+
+# Create the body of the email.
+for key in keys:
+    dynamic_text = f"\n Processed file from bucket: {s3_bucketname}, file path: {key}"
+    v_email_body = v_email_body + dynamic_text.format(s3_bucketname=s3_bucketname,key=key)
+
+notify_via_email = EmailOperator(
+    task_id="notify_via_email",
+    to=v_email_id,
+    subject=v_email_subject,
+    html_content=v_email_body,
+    trigger_rule='all_success',
+    dag=dag)
+
+start_task >> s3_sensor
+
 for key in keys:
     k = ''.join(e for e in key if e.isalnum())
     print("Creating a task for key: " + key)
@@ -77,5 +82,5 @@ for key in keys:
             op_kwargs={'s3_bucket': s3_bucketname, 's3_key': key},
             dag=dag
         )
-        v_email_body = v_email_body + '\n' + 'Processed file from bucket:' + s3_bucketname + ', file path:'+key
+
         s3_sensor >> process_task >> notify_via_email
