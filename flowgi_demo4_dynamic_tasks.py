@@ -25,7 +25,7 @@ dag = DAG('flowgi_demo4_dynamic_tasks',
           )
 
 s3_bucketname = Variable.get("demo4_s3_bucketname", deserialize_json=False)
-s3_key = Variable.get("demo4_s3_key", deserialize_json=False)
+s3_chk_key = Variable.get("demo4_s3_key", deserialize_json=False)
 s3_key_prefix = Variable.get("demo4_s3_key_prefix", deserialize_json=False)
 
 start_task = DummyOperator(task_id='demo4_start', dag=dag)
@@ -36,7 +36,7 @@ s3_sensor = S3KeySensor(
     poke_interval=5,
     timeout=10,
     soft_fail=True,
-    bucket_key=s3_key,
+    bucket_key=s3_chk_key,
     bucket_name=s3_bucketname,
     wildcard_match=True,
     aws_conn_id='customer1_demo_s3',
@@ -58,7 +58,7 @@ print("S3 Key Prefix:"+s3_key_prefix)
 for key in keys:
     k = ''.join(e for e in key if e.isalnum())
     print("Creating a task for key: " + key)
-    if key != s3_key_prefix:
+    if key != s3_key_prefix and key != s3_chk_key:
         process_task = PythonOperator(
             task_id='Process_file_' + k,
             python_callable=flowgi_process_file,
