@@ -2,7 +2,7 @@ import requests
 import json
 
 # Update to match your API key
-API_KEY = '6ko9B8K5yCbMmETsNoaV'
+API_KEY = 'fL_Ps7E5q1PZqiobxxTQ'
 SERVICE_ID = 'PG7SVKW'
 FROM = 'vipin.chadha@gmail.com'
 
