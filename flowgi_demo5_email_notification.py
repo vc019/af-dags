@@ -75,7 +75,6 @@ start_task >> s3_sensor
 
 for key in keys:
     k = ''.join(e for e in key if e.isalnum())
-    print("Creating a task for key: " + key)
     if key != s3_key_prefix and key != s3_chk_key:
         process_task = PythonOperator(
             task_id='Process_file_' + k,
@@ -83,5 +82,4 @@ for key in keys:
             op_kwargs={'s3_bucket': s3_bucketname, 's3_key': key},
             dag=dag
         )
-
         s3_sensor >> process_task >> notify_via_email
