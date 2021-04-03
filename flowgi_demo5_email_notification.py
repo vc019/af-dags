@@ -61,7 +61,7 @@ print("S3 Key Prefix:" + s3_key_prefix)
 
 # Create the body of the email.
 for key in keys:
-    dynamic_text = f"Processed file from bucket: {s3_bucketname}, file path: {key}"
+    dynamic_text = f"\n Processed file from bucket: {s3_bucketname}, file path: {key}"
     v_email_body = v_email_body + os.linesep + dynamic_text.format(s3_bucketname=s3_bucketname, key=key)
 
 notify_via_email = EmailOperator(
