@@ -65,4 +65,4 @@ for key in keys:
             op_kwargs={'s3_bucket': s3_bucketname, 's3_key': key},
             dag=dag
         )
-    s3_sensor >> process_task >> end_task
+        s3_sensor >> process_task >> end_task
