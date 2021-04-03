@@ -37,7 +37,7 @@ default_args = {
 }
 
 dag = DAG('flowgi_demo6_SLAs',
-          schedule_interval='* * * * *',
+          schedule_interval='@daily',
           default_args=default_args,
           catchup=False,
           sla_miss_callback=cw_sla_missed_take_action
