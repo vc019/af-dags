@@ -57,8 +57,8 @@ s3_key_prefix = s3_key_prefix + '/'
 print("S3 Key Prefix:"+s3_key_prefix)
 for key in keys:
     k = ''.join(e for e in key if e.isalnum())
+    print("Creating a task for key: " + key)
     if key != s3_key_prefix:
-        print("Creating a task for key: " + key)
         process_task = PythonOperator(
             task_id='Process_file_' + k,
             python_callable=flowgi_process_file,
