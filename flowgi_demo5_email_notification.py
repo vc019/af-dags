@@ -1,3 +1,4 @@
+import os
 from datetime import datetime, timedelta
 from airflow.models import DAG
 from airflow.operators.sensors import S3KeySensor
@@ -52,6 +53,7 @@ def flowgi_process_file(s3_bucket, s3_key):
     print("Bucket Name:" + s3_bucket)
     print("Key Name:" + s3_key)
 
+
 v_s3hook = S3Hook(aws_conn_id='customer1_demo_s3')
 keys = v_s3hook.list_keys(s3_bucketname, s3_key_prefix)
 s3_key_prefix = s3_key_prefix + '/'
@@ -59,8 +61,8 @@ print("S3 Key Prefix:" + s3_key_prefix)
 
 # Create the body of the email.
 for key in keys:
-    dynamic_text = f"\n Processed file from bucket: {s3_bucketname}, file path: {key}"
-    v_email_body = v_email_body + dynamic_text.format(s3_bucketname=s3_bucketname,key=key)
+    dynamic_text = f"Processed file from bucket: {s3_bucketname}, file path: {key}"
+    v_email_body = v_email_body + os.linesep + dynamic_text.format(s3_bucketname=s3_bucketname, key=key)
 
 notify_via_email = EmailOperator(
     task_id="notify_via_email",
