@@ -52,6 +52,7 @@ start_task >> s3_sensor
 v_s3hook = S3Hook(aws_conn_id='customer1_demo_s3')
 keys = v_s3hook.list_keys(s3_bucketname, s3_key_prefix)
 
+s3_key_prefix = s3_key_prefix + '/'
 for key in keys:
     k = ''.join(e for e in key if e.isalnum())
     if key != s3_key_prefix:
