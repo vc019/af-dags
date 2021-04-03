@@ -1,7 +1,8 @@
 # Filename: flowgi_demo6_SLAs.py
 import os
 import sys
-sys.path.insert(0,os.path.abspath(os.path.dirname(__file__)))
+
+sys.path.insert(0, os.path.abspath(os.path.dirname(__file__)))
 
 from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
@@ -21,6 +22,7 @@ def cw_sla_missed_take_action(*args, **kwargs):
     incident_priority = 'P1'
     trigger_incident(incident_title, incident_details, incident_priority)
     logger.info("************************************* incident created ***************************************")
+
 
 default_args = {
     'owner': 'airflow',

@@ -37,7 +37,7 @@ def trigger_incident(incident_title, incident_details, incident_priority):
     priority_id = get_priorities(incident_priority)
     payload = {
         "incident": {
-            "type": "cloudwalker incident",
+            "type": "flowgi incident",
             "title": incident_title,
             "service": {
                 "id": SERVICE_ID,
