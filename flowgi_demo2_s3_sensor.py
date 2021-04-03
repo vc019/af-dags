@@ -55,7 +55,5 @@ success_task = PythonOperator(
     dag=dag,
 )
 
-end_task = DummyOperator(task_id='end', dag=dag)
-
 s3_sensor >> failure_task
 s3_sensor >> success_task
