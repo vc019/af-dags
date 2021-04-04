@@ -2,7 +2,7 @@ import requests
 import json
 
 # Update to match your API key
-API_KEY = 'fL_Ps7E5q1PZqiobxxTQ'
+API_KEY = '6ko9B8K5yCbMmETsNoaV'
 SERVICE_ID = 'PEKHKSU'
 FROM = 'vipin.chadha@gmail.com'
 
@@ -61,4 +61,4 @@ def trigger_incident(incident_title, incident_details, incident_priority):
 
 
 if __name__ == '__main__':
-    trigger_incident("This is the incident title", "caused some incident", "P1")
+    trigger_incident("FlowGi Test Incident", "Demo6 DAG has missed an SLA", "P2")
